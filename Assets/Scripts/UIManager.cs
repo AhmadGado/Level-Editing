@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     static UIManager instance;
 
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject winPanel;
     [SerializeField] GameObject messagePanel;
     [SerializeField] TextMeshProUGUI msgTxt;
 
@@ -32,14 +33,19 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gameOverPanel.SetActive(false);
+        winPanel.SetActive(false);
         MessagePanel.SetActive(true);
-        StartCoroutine("HideMessagePanel");
+        StartCoroutine("HideMessagePanel",7);
     }
      
 
     public void ActivateGameOverPanel()
     {
         gameOverPanel.SetActive(true);
+    }  
+    public void ActivateWinPanel()
+    {
+        winPanel.SetActive(true);
     }
 
 
