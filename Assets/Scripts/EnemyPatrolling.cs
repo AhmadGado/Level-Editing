@@ -75,6 +75,11 @@ public class EnemyPatrolling : MonoBehaviour
                 break;
             case AIState.Chaise:
                 Chaise(target);
+                if (target.GetComponent<playerMovement>())
+                {
+                    target.GetComponent<playerMovement>().enabled = false;
+                    target.GetComponent<Animator>().enabled = false;
+                }
                 break;
             case AIState.None:
                 UIManager.Instance.ActivateGameOverPanel();
@@ -149,6 +154,7 @@ public class EnemyPatrolling : MonoBehaviour
 
     private void Chaise(Transform target)
     {
+        navMeshAgent.stoppingDistance =3;
         navMeshAgent.SetDestination(target.position);
         caught = true;
         aiState = AIState.None;

@@ -9,7 +9,7 @@ public class StaticEnemy : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] GameObject player;
     [SerializeField] float rotationAngleValue;
-    
+    [SerializeField] float rotationConstrain;
     private bool detected;
 
     // Update is called once per frame
@@ -17,7 +17,7 @@ public class StaticEnemy : MonoBehaviour
     {
         if (!detected)
         {       
-            Rotating(rotationAngleValue);
+            Rotating(rotationAngleValue, rotationConstrain);
             if (IsTargetInRange())
             {
                 Debug.Log("detected");
@@ -37,11 +37,19 @@ public class StaticEnemy : MonoBehaviour
     }
 
 
-    void Rotating(float rotationAngle = 180)
+    void Rotating(float rotationAngle = 180, float rotationConstrain = 0)
     {
         if(rotationAngle != 0) { 
         float angle = Mathf.PingPong(Time.time * rotationSpeed, rotationAngle) - (rotationAngle/2f); 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        
+            if(angle < rotationConstrain)
+            {
+                angle *= -1;
+                
+            }
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+           
+                
         }
     }
 
@@ -72,7 +80,7 @@ public class StaticEnemy : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Color c = Color.red;
-        c.a = 0.2f;
+        c.a = 0.05f;
         UnityEditor.Handles.color = c;
         UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.up, sightSetting.SightRange);
 
