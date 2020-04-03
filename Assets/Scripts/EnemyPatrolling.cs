@@ -88,7 +88,7 @@ public class EnemyPatrolling : MonoBehaviour
         bool detected;
         float sightAngle; 
 
-        Vector3 start = transform.position - (transform.up / 2); //sight eyeheight
+        Vector3 start = transform.position + (transform.up / 2); //sight eyeheight
         Vector3 dir = (player.transform.position) - start;
 
         Debug.DrawRay(start, dir.normalized * sightSetting.SightRange, Color.red);
@@ -166,7 +166,7 @@ public class EnemyPatrolling : MonoBehaviour
         Vector3 fovLine2 = Quaternion.AngleAxis(-sightSetting.FieldOfView / 2, transform.up) * transform.forward * sightSetting.SightRange;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, fovLine1);
+        Gizmos.DrawRay(transform.position , fovLine1);
         Gizmos.DrawRay(transform.position, fovLine2);
     }
 }

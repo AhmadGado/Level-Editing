@@ -8,6 +8,7 @@ public class StaticEnemy : MonoBehaviour
     [SerializeField] SightSettings sightSetting;
     [SerializeField] float rotationSpeed;
     [SerializeField] GameObject player;
+    [SerializeField] float rotationAngleValue;
     
     private bool detected;
 
@@ -16,7 +17,7 @@ public class StaticEnemy : MonoBehaviour
     {
         if (!detected)
         {       
-            Rotating();
+            Rotating(rotationAngleValue);
             if (IsTargetInRange())
             {
                 Debug.Log("detected");
@@ -36,10 +37,12 @@ public class StaticEnemy : MonoBehaviour
     }
 
 
-    void Rotating()
+    void Rotating(float rotationAngle = 180)
     {
-        float angle = Mathf.PingPong(Time.time * rotationSpeed, 100) - 50; 
+        if(rotationAngle != 0) { 
+        float angle = Mathf.PingPong(Time.time * rotationSpeed, rotationAngle) - (rotationAngle/2f); 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        }
     }
 
     bool IsTargetInRange()
@@ -47,7 +50,7 @@ public class StaticEnemy : MonoBehaviour
         bool detected;
         float sightAngle;
 
-        Vector3 start = transform.position - (transform.up / 2); //sight eyeheight
+        Vector3 start = transform.position + (transform.up / 2); //sight eyeheight
         Vector3 dir = (player.transform.position) - start;
 
         Debug.DrawRay(start, dir.normalized * sightSetting.SightRange, Color.red);
