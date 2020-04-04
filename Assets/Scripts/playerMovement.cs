@@ -14,11 +14,7 @@ public class playerMovement : MonoBehaviour
     private float x;
     private float z;
     private Vector3 movement;
-
-    private void Start()
-    {
-        controller.detectCollisions = false;
-    }
+     
     private void Update()
     {
         x = Input.GetAxis("Horizontal");

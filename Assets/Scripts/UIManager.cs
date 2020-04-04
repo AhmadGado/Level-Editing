@@ -60,4 +60,9 @@ public class UIManager : MonoBehaviour
         msgTxt.text = msg;
         StartCoroutine("HideMessagePanel", 5);
     }
+
+    public void TryAgain()
+    {
+        SceneMGRScript.Instance.LoadGamePlayScene();
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WinTrigger : MonoBehaviour
 {
-     
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -15,11 +15,10 @@ public class WinTrigger : MonoBehaviour
             }
             else
             {
-                Debug.Log("ll");
-                UIManager.Instance.MessagePanel.SetActive(true);
+                 UIManager.Instance.MessagePanel.SetActive(true);
                 UIManager.Instance.SetMessage("Find the key to open the door");
             }
-        }    
+        }
     }
 
 }

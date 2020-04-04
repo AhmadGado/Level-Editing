@@ -12,6 +12,8 @@ public class KeyTrigger : MonoBehaviour
             other.GetComponent<Inventory>().HasKey = true;
             UIManager.Instance.MessagePanel.SetActive(true);
             UIManager.Instance.SetMessage("Now find the door.");
+
+            Destroy(this.gameObject);
         }
     }
 
